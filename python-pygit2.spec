@@ -14,6 +14,7 @@ Group:		Libraries/Python
 Source0:	http://pypi.python.org/packages/source/p//pygit2/%{module}-%{version}.tar.gz
 # Source0-md5:	8d27f84509a96d6791a6c393ae67d7c8
 URL:		https://pypi.python.org/pypi/pygit2
+BuildRequires:	libgit2-devel
 BuildRequires:	python-devel
 BuildRequires:	python-distribute
 BuildRequires:	rpm-pythonprov
