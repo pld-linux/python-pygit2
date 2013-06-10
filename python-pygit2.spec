@@ -30,12 +30,11 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 pygit2 is a set of Python bindings to the libgit2 shared library.
 
-%package -n	python3-%{module}
+%package -n python3-%{module}
 Summary:	Python bindings for libgit2 library
 
 %description -n python3-%{module}
 pygit2 is a set of Python bindings to the libgit2 shared library.
-
 
 %package apidoc
 Summary:	pygit2 API documentation
@@ -50,7 +49,6 @@ Dokumentacja API %{module}.
 
 %prep
 %setup -q -n %{module}-%{version}
-
 
 %build
 %{__python} setup.py build --build-base build-2
@@ -77,12 +75,12 @@ rm -rf _build/html/_sources
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 %{__python} -- setup.py \
 	build -b build-2 \
 	install \
 	--root=$RPM_BUILD_ROOT \
 	--optimize=2
+
 %py_postclean
 
 %if %{with python3}
@@ -93,8 +91,6 @@ rm -rf $RPM_BUILD_ROOT
 	--optimize=2
 %endif
 
-
-# change %{py_sitedir} to %{py_sitescriptdir} for 'noarch' packages!
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
 %py_postclean
