@@ -7,14 +7,14 @@
 %define 	module	pygit2
 Summary:	Python bindings for libgit2 library
 Name:		python-%{module}
-Version:	0.18.1
+Version:	0.19.0
 Release:	1
 License:	GPL v2 with linking exception
 Group:		Libraries/Python
 Source0:	http://pypi.python.org/packages/source/p//pygit2/%{module}-%{version}.tar.gz
-# Source0-md5:	8d27f84509a96d6791a6c393ae67d7c8
+# Source0-md5:	eb0c2e036969505b17cfe47631cbddc1
 URL:		https://pypi.python.org/pypi/pygit2
-BuildRequires:	libgit2-devel
+BuildRequires:	libgit2-devel >= 0.19.0
 BuildRequires:	python-devel
 BuildRequires:	python-distribute
 BuildRequires:	rpm-pythonprov
