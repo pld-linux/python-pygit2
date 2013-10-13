@@ -56,14 +56,14 @@ Dokumentacja API %{module}.
 %{__python3} setup.py build --build-base build-3
 %endif
 
-%{?with_tests:%{__python} setup.py test}
+%{?with_tests:%{__python} setup.py build -b build-2 test}
 
 %if %{with python3}
 %{__python3} setup.py \
 	build -b build-3
 
 %if %{with tests}
-%{__python3} setup.py test
+%{__python3} setup.py build -b build-3 test
 %endif
 %endif
 
