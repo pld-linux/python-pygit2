@@ -8,7 +8,7 @@
 Summary:	Python bindings for libgit2 library
 Name:		python-%{module}
 Version:	0.19.1
-Release:	1
+Release:	2
 License:	GPL v2 with linking exception
 Group:		Libraries/Python
 Source0:	http://pypi.python.org/packages/source/p//pygit2/%{module}-%{version}.tar.gz
