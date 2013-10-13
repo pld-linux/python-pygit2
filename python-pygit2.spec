@@ -13,6 +13,7 @@ License:	GPL v2 with linking exception
 Group:		Libraries/Python
 Source0:	http://pypi.python.org/packages/source/p//pygit2/%{module}-%{version}.tar.gz
 # Source0-md5:	6c61833605bb52a483141780ad233584
+Patch0:		%{name}-docbuild.patch
 URL:		https://pypi.python.org/pypi/pygit2
 BuildRequires:	libgit2-devel >= 0.19.0
 BuildRequires:	python-devel
@@ -49,6 +50,7 @@ Dokumentacja API %{module}.
 
 %prep
 %setup -q -n %{module}-%{version}
+%patch0 -p0
 
 %build
 %{__python} setup.py build --build-base build-2
@@ -69,7 +71,7 @@ Dokumentacja API %{module}.
 
 %if %{with docs}
 cd docs
-%{__make} -j1 html
+PACKAGE_BUILD=../build-2 %{__make} -j1 html
 rm -rf _build/html/_sources
 %endif
 

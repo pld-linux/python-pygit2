@@ -1,0 +1,17 @@
+--- docs/conf.py.orig	2013-10-13 17:53:38.807267727 +0100
++++ docs/conf.py	2013-10-13 18:06:24.038047114 +0100
+@@ -12,11 +12,13 @@
+ # serve to show the default.
+ 
+ import sys, os
++from distutils.util import get_platform
+ 
+ # If extensions (or modules to document with autodoc) are in another directory,
+ # add these directories to sys.path here. If the directory is relative to the
+ # documentation root, use os.path.abspath to make it absolute, like shown here.
+-sys.path.insert(0, os.path.abspath('../build/lib.linux-x86_64-2.7'))
++builddir = os.getenv('PACKAGE_BUILD', '../build')
++sys.path.insert(0, os.path.abspath('%s/lib.%s-%s' % (builddir, get_platform(), sys.version[0:3])))
+ 
+ # -- General configuration -----------------------------------------------------
+ 
