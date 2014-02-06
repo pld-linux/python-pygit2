@@ -5,13 +5,14 @@
 %bcond_without	docs	# documentation
 
 %define 	module	pygit2
-Summary:	Python bindings for libgit2 library
+Summary:	Python 2.x bindings for libgit2 library
+Summary(pl.UTF-8):	Wiązania Pythona 2.x do biblioteki libgit2
 Name:		python-%{module}
 Version:	0.20.2
 Release:	1
 License:	GPL v2 with linking exception
 Group:		Libraries/Python
-Source0:	http://pypi.python.org/packages/source/p//pygit2/%{module}-%{version}.tar.gz
+Source0:	http://pypi.python.org/packages/source/p/pygit2/%{module}-%{version}.tar.gz
 # Source0-md5:	ddfe43076a45418a1122ca668b7b0247
 Patch0:		%{name}-docbuild.patch
 URL:		https://pypi.python.org/pypi/pygit2
@@ -26,16 +27,26 @@ BuildRequires:	python3-distribute
 BuildRequires:	python3-modules
 %endif
 %{?with_docs:BuildRequires:     sphinx-pdg}
+Requires:	libgit2 >= 0.20.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 pygit2 is a set of Python bindings to the libgit2 shared library.
 
+%description -l pl.UTF-8
+pygit2 to zbiór wiązań Pythona do biblioteki współdzielonej libgit2.
+
 %package -n python3-%{module}
-Summary:	Python bindings for libgit2 library
+Summary:	Python 3.x bindings for libgit2 library
+Summary(pl.UTF-8):	Wiązania Pythona 3.x do biblioteki libgit2
+Group:		Libraries/Python
+Requires:	libgit2 >= 0.20.0
 
 %description -n python3-%{module}
 pygit2 is a set of Python bindings to the libgit2 shared library.
+
+%description -n python3-%{module} -l pl.UTF-8
+pygit2 to zbiór wiązań Pythona do biblioteki współdzielonej libgit2.
 
 %package apidoc
 Summary:	pygit2 API documentation
@@ -71,7 +82,8 @@ Dokumentacja API %{module}.
 
 %if %{with docs}
 cd docs
-PACKAGE_BUILD=../build-2 %{__make} -j1 html
+PACKAGE_BUILD=../build-2 \
+%{__make} -j1 html
 rm -rf _build/html/_sources
 %endif
 
