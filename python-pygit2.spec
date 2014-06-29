@@ -8,12 +8,12 @@
 Summary:	Python 2.x bindings for libgit2 library
 Summary(pl.UTF-8):	Wiązania Pythona 2.x do biblioteki libgit2
 Name:		python-%{module}
-Version:	0.20.3
+Version:	0.21.0
 Release:	1
 License:	GPL v2 with linking exception
 Group:		Libraries/Python
 Source0:	https://pypi.python.org/packages/source/p/pygit2/%{module}-%{version}.tar.gz
-# Source0-md5:	1efcc58383fd2e558a8d3cba4dcc4754
+# Source0-md5:	ffd1df8fa73e65bc6d2b66ad8f90412c
 Patch0:		%{name}-docbuild.patch
 URL:		https://pypi.python.org/pypi/pygit2
 BuildRequires:	libgit2-devel >= 0.20.0
@@ -118,22 +118,26 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc COPYING README.rst TODO.txt
-%dir %{py_sitedir}/%{module}
+%dir %{py_sitedir}/pygit2
 %{py_sitedir}/pygit2/*.py[co]
-%attr(755,root,root) %{py_sitedir}/*.so
+%{py_sitedir}/pygit2/decl.h
+%attr(755,root,root) %{py_sitedir}/_cffi__*.so
+%attr(755,root,root) %{py_sitedir}/_pygit2.so
 %if "%{py_ver}" > "2.4"
-%{py_sitedir}/pygit2-*.egg-info
+%{py_sitedir}/pygit2-%{version}-py*.egg-info
 %endif
 
 %if %{with python3}
 %files -n python3-%{module}
 %defattr(644,root,root,755)
 %doc COPYING README.rst TODO.txt
-%dir %{py3_sitedir}/%{module}
-%attr(755,root,root) %{py3_sitedir}/*.so
-%{py3_sitedir}/%{module}/*.py
-%{py3_sitedir}/%{module}/__pycache__
-%{py3_sitedir}/pygit2-*.egg-info
+%dir %{py3_sitedir}/pygit2
+%attr(755,root,root) %{py3_sitedir}/_cffi__*.so
+%attr(755,root,root) %{py3_sitedir}/_pygit2.*.so
+%{py3_sitedir}/pygit2/decl.h
+%{py3_sitedir}/pygit2/*.py
+%{py3_sitedir}/pygit2/__pycache__
+%{py3_sitedir}/pygit2-%{version}-py*.egg-info
 %endif
 
 %if %{with docs}
