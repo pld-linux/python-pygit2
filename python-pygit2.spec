@@ -16,7 +16,7 @@ Source0:	https://pypi.python.org/packages/source/p/pygit2/%{module}-%{version}.t
 # Source0-md5:	bcb35b873e70628ad1c8f72cb137f310
 Patch0:		%{name}-docbuild.patch
 URL:		https://pypi.python.org/pypi/pygit2
-BuildRequires:	libgit2-devel >= 0.20.0
+BuildRequires:	libgit2-devel >= 0.21.0
 BuildRequires:	python-devel
 BuildRequires:	python-distribute
 BuildRequires:	rpm-pythonprov
@@ -27,7 +27,7 @@ BuildRequires:	python3-distribute
 BuildRequires:	python3-modules
 %endif
 %{?with_docs:BuildRequires:     sphinx-pdg}
-Requires:	libgit2 >= 0.20.0
+Requires:	libgit2 >= 0.21.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -40,7 +40,7 @@ pygit2 to zbiór wiązań Pythona do biblioteki współdzielonej libgit2.
 Summary:	Python 3.x bindings for libgit2 library
 Summary(pl.UTF-8):	Wiązania Pythona 3.x do biblioteki libgit2
 Group:		Libraries/Python
-Requires:	libgit2 >= 0.20.0
+Requires:	libgit2 >= 0.21.0
 
 %description -n python3-%{module}
 pygit2 is a set of Python bindings to the libgit2 shared library.
