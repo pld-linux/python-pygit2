@@ -8,15 +8,18 @@
 Summary:	Python 2.x bindings for libgit2 library
 Summary(pl.UTF-8):	Wiązania Pythona 2.x do biblioteki libgit2
 Name:		python-%{module}
-Version:	0.21.4
+Version:	0.22.0
 Release:	1
 License:	GPL v2 with linking exception
 Group:		Libraries/Python
+#Source0Download: https://pypi.python.org/pypi/pygit2
 Source0:	https://pypi.python.org/packages/source/p/pygit2/%{module}-%{version}.tar.gz
-# Source0-md5:	8a3d02eded2bef2e0af18172814eec32
+# Source0-md5:	31dc65b3cbe6e39d75a39db86dd7cd8c
 Patch0:		%{name}-docbuild.patch
+# https://github.com/libgit2/pygit2/pull/487.patch
+Patch1:		487.patch
 URL:		https://pypi.python.org/pypi/pygit2
-BuildRequires:	libgit2-devel >= 0.21.0
+BuildRequires:	libgit2-devel >= 0.22.0
 BuildRequires:	python-devel
 BuildRequires:	python-distribute
 BuildRequires:	rpm-pythonprov
@@ -27,7 +30,7 @@ BuildRequires:	python3-distribute
 BuildRequires:	python3-modules
 %endif
 %{?with_docs:BuildRequires:     sphinx-pdg}
-Requires:	libgit2 >= 0.21.0
+Requires:	libgit2 >= 0.22.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -40,7 +43,7 @@ pygit2 to zbiór wiązań Pythona do biblioteki współdzielonej libgit2.
 Summary:	Python 3.x bindings for libgit2 library
 Summary(pl.UTF-8):	Wiązania Pythona 3.x do biblioteki libgit2
 Group:		Libraries/Python
-Requires:	libgit2 >= 0.21.0
+Requires:	libgit2 >= 0.22.0
 
 %description -n python3-%{module}
 pygit2 is a set of Python bindings to the libgit2 shared library.
@@ -62,6 +65,7 @@ Dokumentacja API %{module}.
 %prep
 %setup -q -n %{module}-%{version}
 %patch0 -p1
+%patch1 -p1
 
 # these tests use network
 %{__rm} test/test_{credentials,repository}.py
