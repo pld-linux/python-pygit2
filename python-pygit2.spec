@@ -9,7 +9,7 @@ Summary:	Python 2.x bindings for libgit2 library
 Summary(pl.UTF-8):	Wiązania Pythona 2.x do biblioteki libgit2
 Name:		python-%{module}
 Version:	0.22.0
-Release:	1
+Release:	2
 License:	GPL v2 with linking exception
 Group:		Libraries/Python
 #Source0Download: https://pypi.python.org/pypi/pygit2
@@ -20,17 +20,20 @@ Patch0:		%{name}-docbuild.patch
 Patch1:		487.patch
 URL:		https://pypi.python.org/pypi/pygit2
 BuildRequires:	libgit2-devel >= 0.22.0
-BuildRequires:	python-devel
+BuildRequires:	python-cffi
+BuildRequires:	python-devel >= 1:2.7
 BuildRequires:	python-distribute
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 %if %{with python3}
-BuildRequires:	python3-devel
+BuildRequires:	python3-cffi
+BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-distribute
-BuildRequires:	python3-modules
+BuildRequires:	python3-modules >= 1:3.2
 %endif
 %{?with_docs:BuildRequires:     sphinx-pdg}
 Requires:	libgit2 >= 0.22.0
+Requires:	python-cffi
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -44,6 +47,7 @@ Summary:	Python 3.x bindings for libgit2 library
 Summary(pl.UTF-8):	Wiązania Pythona 3.x do biblioteki libgit2
 Group:		Libraries/Python
 Requires:	libgit2 >= 0.22.0
+Requires:	python3-cffi
 
 %description -n python3-%{module}
 pygit2 is a set of Python bindings to the libgit2 shared library.
