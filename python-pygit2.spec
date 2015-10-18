@@ -8,31 +8,29 @@
 Summary:	Python 2.x bindings for libgit2 library
 Summary(pl.UTF-8):	Wiązania Pythona 2.x do biblioteki libgit2
 Name:		python-%{module}
-Version:	0.22.0
-Release:	4
+Version:	0.23.2
+Release:	1
 License:	GPL v2 with linking exception
 Group:		Libraries/Python
 #Source0Download: https://pypi.python.org/pypi/pygit2
 Source0:	https://pypi.python.org/packages/source/p/pygit2/%{module}-%{version}.tar.gz
-# Source0-md5:	31dc65b3cbe6e39d75a39db86dd7cd8c
+# Source0-md5:	c4b00f2add53e17a98c0ebe558d4db80
 Patch0:		%{name}-docbuild.patch
-# https://github.com/libgit2/pygit2/pull/487.patch
-Patch1:		487.patch
 URL:		https://pypi.python.org/pypi/pygit2
-BuildRequires:	libgit2-devel >= 0.22.0
+BuildRequires:	libgit2-devel >= 0.23.0
 BuildRequires:	python-cffi
 BuildRequires:	python-devel >= 1:2.7
-BuildRequires:	python-distribute
+BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 %if %{with python3}
 BuildRequires:	python3-cffi
 BuildRequires:	python3-devel >= 1:3.2
-BuildRequires:	python3-distribute
 BuildRequires:	python3-modules >= 1:3.2
+BuildRequires:	python3-setuptools
 %endif
 %{?with_docs:BuildRequires:     sphinx-pdg}
-Requires:	libgit2 >= 0.22.0
+Requires:	libgit2 >= 0.23.0
 Requires:	python-cffi
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -46,7 +44,7 @@ pygit2 to zbiór wiązań Pythona do biblioteki współdzielonej libgit2.
 Summary:	Python 3.x bindings for libgit2 library
 Summary(pl.UTF-8):	Wiązania Pythona 3.x do biblioteki libgit2
 Group:		Libraries/Python
-Requires:	libgit2 >= 0.22.0
+Requires:	libgit2 >= 0.23.0
 Requires:	python3-cffi
 
 %description -n python3-%{module}
@@ -69,7 +67,6 @@ Dokumentacja API %{module}.
 %prep
 %setup -q -n %{module}-%{version}
 %patch0 -p1
-%patch1 -p1
 
 # these tests use network
 %{__rm} test/test_{credentials,repository}.py
@@ -129,7 +126,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitedir}/pygit2
 %{py_sitedir}/pygit2/*.py[co]
 %{py_sitedir}/pygit2/decl.h
-%attr(755,root,root) %{py_sitedir}/pygit2_cffi_*.so
+%attr(755,root,root) %{py_sitedir}/pygit2/_libgit2.so
 %attr(755,root,root) %{py_sitedir}/_pygit2.so
 %if "%{py_ver}" > "2.4"
 %{py_sitedir}/pygit2-%{version}-py*.egg-info
@@ -140,11 +137,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc COPYING README.rst TODO.txt
 %dir %{py3_sitedir}/pygit2
-%attr(755,root,root) %{py3_sitedir}/pygit2_cffi_*.cpython-*.so
-%attr(755,root,root) %{py3_sitedir}/_pygit2.cpython-*.so
 %{py3_sitedir}/pygit2/decl.h
 %{py3_sitedir}/pygit2/*.py
 %{py3_sitedir}/pygit2/__pycache__
+%attr(755,root,root) %{py3_sitedir}/pygit2/_libgit2.cpython-*.so
+%attr(755,root,root) %{py3_sitedir}/_pygit2.cpython-*.so
 %{py3_sitedir}/pygit2-%{version}-py*.egg-info
 %endif
 
