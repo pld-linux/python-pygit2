@@ -72,19 +72,19 @@ Dokumentacja API %{module}.
 %{__rm} test/test_{credentials,repository}.py
 
 %build
-%{__python} setup.py build --build-base build-2
+%py_build
 %if %{with python3}
-%{__python3} setup.py build --build-base build-3
+%py3_build
 %endif
 
-%{?with_tests:%{__python} setup.py build -b build-2 test}
+%{?with_tests:%py_build test}
 
 %if %{with python3}
 %{__python3} setup.py \
 	build -b build-3
 
 %if %{with tests}
-%{__python3} setup.py build -b build-3 test
+%py3_build test
 %endif
 %endif
 
@@ -106,11 +106,7 @@ rm -rf $RPM_BUILD_ROOT
 %py_postclean
 
 %if %{with python3}
-%{__python3} setup.py \
-	build --build-base build-3 \
-	install \
-	--root=$RPM_BUILD_ROOT \
-	--optimize=2
+%py3_install
 %endif
 
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
