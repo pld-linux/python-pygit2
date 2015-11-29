@@ -22,7 +22,7 @@ BuildRequires:	python-cffi
 BuildRequires:	python-devel >= 1:2.7
 BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.219
+BuildRequires:	rpmbuild(macros) >= 1.710
 %if %{with python3}
 BuildRequires:	python3-cffi
 BuildRequires:	python3-devel >= 1:3.2
