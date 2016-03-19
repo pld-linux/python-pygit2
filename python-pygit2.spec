@@ -1,3 +1,5 @@
+# TODO:
+# building doc requires pygit2 installed in system
 #
 # Conditional build:
 %bcond_without	tests	# do not perform "make test"
@@ -22,7 +24,7 @@ BuildRequires:	python-cffi
 BuildRequires:	python-devel >= 1:2.7
 BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.710
+BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with python3}
 BuildRequires:	python3-cffi
 BuildRequires:	python3-devel >= 1:3.2
@@ -73,19 +75,11 @@ Dokumentacja API %{module}.
 
 %build
 %py_build
-%if %{with python3}
-%py3_build
-%endif
-
 %{?with_tests:%py_build test}
 
 %if %{with python3}
-%{__python3} setup.py \
-	build -b build-3
-
-%if %{with tests}
-%py3_build test
-%endif
+%py3_build
+%{?with_tests:%py3_build test}
 %endif
 
 %if %{with docs}
@@ -97,21 +91,12 @@ rm -rf _build/html/_sources
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__python} -- setup.py \
-	build -b build-2 \
-	install \
-	--root=$RPM_BUILD_ROOT \
-	--optimize=2
-
+%py_install
 %py_postclean
 
 %if %{with python3}
 %py3_install
 %endif
-
-%py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
-%py_comp $RPM_BUILD_ROOT%{py_sitedir}
-%py_postclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -124,9 +109,7 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitedir}/pygit2/decl.h
 %attr(755,root,root) %{py_sitedir}/pygit2/_libgit2.so
 %attr(755,root,root) %{py_sitedir}/_pygit2.so
-%if "%{py_ver}" > "2.4"
 %{py_sitedir}/pygit2-%{version}-py*.egg-info
-%endif
 
 %if %{with python3}
 %files -n python3-%{module}
