@@ -4,7 +4,7 @@
 # Conditional build:
 %bcond_without	tests	# do not perform "make test"
 %bcond_without	python3 # CPython 3.x module
-%bcond_without	docs	# documentation
+%bcond_without	doc	# documentation
 
 %define 	module	pygit2
 Summary:	Python 2.x bindings for libgit2 library
@@ -82,7 +82,7 @@ Dokumentacja API %{module}.
 %{?with_tests:%py3_build test}
 %endif
 
-%if %{with docs}
+%if %{with doc}
 cd docs
 PACKAGE_BUILD=../build-2 \
 %{__make} -j1 html
@@ -124,7 +124,7 @@ rm -rf $RPM_BUILD_ROOT
 %{py3_sitedir}/pygit2-%{version}-py*.egg-info
 %endif
 
-%if %{with docs}
+%if %{with doc}
 %files apidoc
 %defattr(644,root,root,755)
 %doc docs/_build/html/*
