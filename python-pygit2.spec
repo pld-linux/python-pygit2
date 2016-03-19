@@ -31,7 +31,7 @@ BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	python3-setuptools
 %endif
-%{?with_docs:BuildRequires:     sphinx-pdg}
+%{?with_doc:BuildRequires:     sphinx-pdg}
 Requires:	libgit2 >= 0.23.0
 Requires:	python-cffi
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
