@@ -10,13 +10,13 @@
 Summary:	Python 2.x bindings for libgit2 library
 Summary(pl.UTF-8):	Wiązania Pythona 2.x do biblioteki libgit2
 Name:		python-%{module}
-Version:	0.23.2
-Release:	2
+Version:	0.23.3
+Release:	1
 License:	GPL v2 with linking exception
 Group:		Libraries/Python
 #Source0Download: https://pypi.python.org/pypi/pygit2
 Source0:	https://pypi.python.org/packages/source/p/pygit2/%{module}-%{version}.tar.gz
-# Source0-md5:	c4b00f2add53e17a98c0ebe558d4db80
+# Source0-md5:	1c20926ad48ce622b0087ab2bb812ae3
 Patch0:		%{name}-docbuild.patch
 URL:		https://pypi.python.org/pypi/pygit2
 BuildRequires:	libgit2-devel >= 0.23.0
