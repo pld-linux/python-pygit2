@@ -12,7 +12,7 @@ Summary:	Python 2.x bindings for libgit2 library
 Summary(pl.UTF-8):	Wiązania Pythona 2.x do biblioteki libgit2
 Name:		python-%{module}
 Version:	0.24.0
-Release:	1
+Release:	2
 License:	GPL v2 with linking exception
 Group:		Libraries/Python
 #Source0Download: https://pypi.python.org/simple/pygit2/
@@ -58,15 +58,19 @@ pygit2 is a set of Python bindings to the libgit2 shared library.
 %description -n python3-%{module} -l pl.UTF-8
 pygit2 to zbiór wiązań Pythona do biblioteki współdzielonej libgit2.
 
-%package apidoc
+%package apidocs
 Summary:	pygit2 module API documentation
 Summary(pl.UTF-8):	Dokumentacja API modułu pygit2
 Group:		Documentation
+Obsoletes:	python-pygit2-apidoc < 0.24.0-2
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
-%description apidoc
+%description apidocs
 API documentation for pygit2 module.
 
-%description apidoc -l pl.UTF-8
+%description apidocs -l pl.UTF-8
 Dokumentacja API modułu pygit2.
 
 %prep
@@ -135,7 +139,7 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %if %{with doc}
-%files apidoc
+%files apidocs
 %defattr(644,root,root,755)
 %doc docs/_build/html/*
 %endif
