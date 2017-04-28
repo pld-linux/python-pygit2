@@ -26,12 +26,12 @@ BuildRequires:	libgit2-devel >= 0.24.0
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with python2}
-BuildRequires:	python-cffi
+BuildRequires:	python-cffi >= 1.8.1
 BuildRequires:	python-devel >= 1:2.7
 BuildRequires:	python-setuptools
 %endif
 %if %{with python3}
-BuildRequires:	python3-cffi
+BuildRequires:	python3-cffi >= 1.8.1
 BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	python3-setuptools
@@ -135,7 +135,7 @@ rm -rf $RPM_BUILD_ROOT
 %{py3_sitedir}/pygit2/decl.h
 %{py3_sitedir}/pygit2/*.py
 %{py3_sitedir}/pygit2/__pycache__
-%attr(755,root,root) %{py3_sitedir}/pygit2/_libgit2.cpython-*.so
+%attr(755,root,root) %{py3_sitedir}/pygit2/_libgit2.abi3.so
 %attr(755,root,root) %{py3_sitedir}/_pygit2.cpython-*.so
 %{py3_sitedir}/pygit2-%{version}-py*.egg-info
 %endif
