@@ -1,0 +1,110 @@
+From a36d3bebba08471caafe3e976a74afd040e90480 Mon Sep 17 00:00:00 2001
+From: Mathieu Bridon <bochecha@daitauha.fr>
+Date: Wed, 21 Jan 2015 09:33:46 +0100
+Subject: [PATCH] Remove remote-calling unit tests
+
+These can only fail when building in Koji, as the builder can't access
+the Internet.
+---
+ test/test_credentials.py | 21 ---------------------
+ test/test_repository.py  |  7 -------
+ test/test_submodule.py   | 28 ----------------------------
+ 3 files changed, 56 deletions(-)
+
+diff --git a/test/test_credentials.py b/test/test_credentials.py
+index ff014c6..019f420 100644
+--- a/test/test_credentials.py
++++ b/test/test_credentials.py
+@@ -81,26 +81,5 @@ class CredentialCallback(utils.RepoTestCase):
+ 
+         self.assertRaises(Exception, lambda: remote.fetch(callbacks=MyCallbacks()))
+ 
+-    def test_bad_cred_type(self):
+-        class MyCallbacks(pygit2.RemoteCallbacks):
+-            @staticmethod
+-            def credentials(url, username, allowed):
+-                self.assertTrue(allowed & GIT_CREDTYPE_USERPASS_PLAINTEXT)
+-                return Keypair("git", "foo.pub", "foo", "sekkrit")
+-
+-        url = "https://github.com/github/github"
+-        remote = self.repo.create_remote("github", url)
+-        self.assertRaises(TypeError, lambda: remote.fetch(callbacks=MyCallbacks()))
+-
+-class CallableCredentialTest(utils.RepoTestCase):
+-
+-    def test_user_pass(self):
+-        credentials = UserPass("libgit2", "libgit2")
+-        callbacks = pygit2.RemoteCallbacks(credentials=credentials)
+-
+-        url = "https://bitbucket.org/libgit2/testgitrepository.git"
+-        remote = self.repo.create_remote("bb", url)
+-        remote.fetch(callbacks=callbacks)
+-
+ if __name__ == '__main__':
+     unittest.main()
+diff --git a/test/test_repository.py b/test/test_repository.py
+index 0969fc0..033a1de 100644
+--- a/test/test_repository.py
++++ b/test/test_repository.py
+@@ -551,13 +551,6 @@ class CloneRepositoryTest(utils.NoRepoTestCase):
+         self.assertTrue('refs/remotes/custom_remote/master' in repo.listall_references())
+         self.assertIsNotNone(repo.remotes["custom_remote"])
+ 
+-    def test_clone_with_credentials(self):
+-        repo = clone_repository(
+-            "https://bitbucket.org/libgit2/testgitrepository.git",
+-            self._temp_dir, callbacks=pygit2.RemoteCallbacks(credentials=pygit2.UserPass("libgit2", "libgit2")))
+-
+-        self.assertFalse(repo.is_empty)
+-
+     def test_clone_with_checkout_branch(self):
+         # create a test case which isolates the remote
+         test_repo = clone_repository('./test/data/testrepo.git',
+diff --git a/test/test_submodule.py b/test/test_submodule.py
+index f123b8b..a42736a 100644
+--- a/test/test_submodule.py
++++ b/test/test_submodule.py
+@@ -53,14 +53,6 @@ class SubmoduleTest(utils.SubmoduleRepoTestCase):
+         self.assertEqual(len(submodules), 1)
+         self.assertEqual(submodules[0], SUBM_PATH)
+ 
+-    def test_submodule_open(self):
+-        s = self.repo.lookup_submodule(SUBM_PATH)
+-        self.repo.init_submodules()
+-        self.repo.update_submodules()
+-        r = s.open()
+-        self.assertIsNotNone(r)
+-        self.assertEqual(str(r.head.target), SUBM_HEAD_SHA)
+-
+     def test_name(self):
+         s = self.repo.lookup_submodule(SUBM_PATH)
+         self.assertEqual(SUBM_NAME, s.name)
+@@ -73,25 +65,5 @@ class SubmoduleTest(utils.SubmoduleRepoTestCase):
+         s = self.repo.lookup_submodule(SUBM_PATH)
+         self.assertEqual(SUBM_URL, s.url)
+ 
+-    def test_init_and_update(self):
+-        subrepo_file_path = os.path.join(self.repo_path, 'submodule', 'setup.py')
+-        self.assertFalse(os.path.exists(subrepo_file_path))
+-        self.repo.init_submodules()
+-        self.repo.update_submodules()
+-        self.assertTrue(os.path.exists(subrepo_file_path))
+-
+-    def test_specified_update(self):
+-        subrepo_file_path = os.path.join(self.repo_path, 'submodule', 'setup.py')
+-        self.assertFalse(os.path.exists(subrepo_file_path))
+-        self.repo.init_submodules(submodules=['submodule'])
+-        self.repo.update_submodules(submodules=['submodule'])
+-        self.assertTrue(os.path.exists(subrepo_file_path))
+-
+-    def test_oneshot_update(self):
+-        subrepo_file_path = os.path.join(self.repo_path, 'submodule', 'setup.py')
+-        self.assertFalse(os.path.exists(subrepo_file_path))
+-        self.repo.update_submodules(init=True)
+-        self.assertTrue(os.path.exists(subrepo_file_path))
+-
+ if __name__ == '__main__':
+     unittest.main()
+-- 
+2.12.2
+
