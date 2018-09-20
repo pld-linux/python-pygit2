@@ -13,17 +13,16 @@
 Summary:	Python 2.x bindings for libgit2 library
 Summary(pl.UTF-8):	Wiązania Pythona 2.x do biblioteki libgit2
 Name:		python-%{module}
-Version:	0.26.1
-Release:	4
+Version:	0.27.2
+Release:	1
 License:	GPL v2 with linking exception
 Group:		Libraries/Python
 #Source0Download: https://pypi.python.org/simple/pygit2/
 Source0:	https://files.pythonhosted.org/packages/source/p/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
-# Source0-md5:	961b53b62c36c8ef9df3cc4e5884f039
+# Source0-md5:	4db3fcd4c104f7e5a3cafb868e2bd0d4
 Patch0:		%{name}-docbuild.patch
-Patch1:		0001-Remove-remote-calling-unit-tests.patch
 URL:		https://pypi.python.org/pypi/pygit2
-BuildRequires:	libgit2-devel >= 0.26.0
+BuildRequires:	libgit2-devel >= 0.27.0
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with python2}
@@ -79,7 +78,6 @@ Dokumentacja API modułu pygit2.
 %prep
 %setup -q -n %{module}-%{version}
 %patch0 -p1
-%patch1 -p1
 
 %build
 %if %{with python2}
