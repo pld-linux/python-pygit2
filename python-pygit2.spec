@@ -28,12 +28,14 @@ BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with python2}
 BuildRequires:	python-cffi >= 1.8.1
 BuildRequires:	python-devel >= 1:2.7
+BuildRequires:	python-pycparser
 BuildRequires:	python-setuptools
 %endif
 %if %{with python3}
 BuildRequires:	python3-cffi >= 1.8.1
 BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
+BuildRequires:	python3-pycparser
 BuildRequires:	python3-setuptools
 %endif
 %{?with_doc:BuildRequires:     sphinx-pdg}
