@@ -14,13 +14,14 @@ Summary:	Python 2.x bindings for libgit2 library
 Summary(pl.UTF-8):	Wiązania Pythona 2.x do biblioteki libgit2
 Name:		python-%{module}
 Version:	0.27.2
-Release:	1
+Release:	2
 License:	GPL v2 with linking exception
 Group:		Libraries/Python
 #Source0Download: https://pypi.python.org/simple/pygit2/
 Source0:	https://files.pythonhosted.org/packages/source/p/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 # Source0-md5:	4db3fcd4c104f7e5a3cafb868e2bd0d4
 Patch0:		%{name}-docbuild.patch
+Patch1:		pycparser.patch
 URL:		https://pypi.python.org/pypi/pygit2
 BuildRequires:	libgit2-devel >= 0.27.0
 BuildRequires:	rpm-pythonprov
@@ -28,14 +29,12 @@ BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with python2}
 BuildRequires:	python-cffi >= 1.8.1
 BuildRequires:	python-devel >= 1:2.7
-BuildRequires:	python-pycparser
 BuildRequires:	python-setuptools
 %endif
 %if %{with python3}
 BuildRequires:	python3-cffi >= 1.8.1
 BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
-BuildRequires:	python3-pycparser
 BuildRequires:	python3-setuptools
 %endif
 %{?with_doc:BuildRequires:     sphinx-pdg}
@@ -80,6 +79,7 @@ Dokumentacja API modułu pygit2.
 %prep
 %setup -q -n %{module}-%{version}
 %patch0 -p1
+%patch1 -p1
 
 %build
 %if %{with python2}
