@@ -1,11 +1,9 @@
-# TODO:
-# building doc requires pygit2 installed in system
 #
 # Conditional build:
-%bcond_without	tests	# do not perform "make test"
 %bcond_without	python2 # CPython 2.x module
 %bcond_without	python3 # CPython 3.x module
 %bcond_without	doc	# documentation
+%bcond_without	tests	# unit tests
 
 %define		module		pygit2
 %define		egg_name	pygit2
@@ -17,12 +15,12 @@ Version:	0.27.2
 Release:	2
 License:	GPL v2 with linking exception
 Group:		Libraries/Python
-#Source0Download: https://pypi.python.org/simple/pygit2/
-Source0:	https://files.pythonhosted.org/packages/source/p/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+#Source0Download: https://pypi.org/simple/pygit2/
+Source0:	https://files.pythonhosted.org/packages/source/p/pygit2/%{pypi_name}-%{version}.tar.gz
 # Source0-md5:	4db3fcd4c104f7e5a3cafb868e2bd0d4
 Patch0:		%{name}-docbuild.patch
 Patch1:		pycparser.patch
-URL:		https://pypi.python.org/pypi/pygit2
+URL:		https://pypi.org/project/pygit2/
 BuildRequires:	libgit2-devel >= 0.27.0
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -37,7 +35,7 @@ BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	python3-setuptools
 %endif
-%{?with_doc:BuildRequires:     sphinx-pdg}
+%{?with_doc:BuildRequires:     sphinx-pdg-3}
 Requires:	libgit2 >= 0.24.0
 Requires:	python-cffi
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -83,20 +81,17 @@ Dokumentacja API modułu pygit2.
 
 %build
 %if %{with python2}
-%py_build
-%{?with_tests:%py_build test}
+%py_build %{?with_tests:test}
 %endif
 
 %if %{with python3}
-%py3_build
-%{?with_tests:%py3_build test}
+%py3_build %{?with_tests:test}
 %endif
 
 %if %{with doc}
-cd docs
-PACKAGE_BUILD=../build-2 \
-%{__make} -j1 html
-%{__rm} -r _build/html/_sources
+PYTHONPATH=$(echo $(pwd)/build-3/lib.*) \
+%{__make} -C docs -j1 html \
+	SPHINXBUILD=sphinx-build-3
 %endif
 
 %install
@@ -104,6 +99,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %if%{with python2}
 %py_install
+
 %py_postclean
 %endif
 
@@ -142,5 +138,5 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with doc}
 %files apidocs
 %defattr(644,root,root,755)
-%doc docs/_build/html/*
+%doc docs/_build/html/{_static,recipes,*.html,*.js}
 %endif
