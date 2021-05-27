@@ -23,7 +23,7 @@ BuildRequires:	python3-cffi >= 1.8.1
 BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	python3-setuptools
-BuildRequires:	python3-pytest
+%{?with_tests:BuildRequires:	python3-pytest}
 Requires:	libgit2 >= 0.24.0
 Requires:	python-cffi
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
