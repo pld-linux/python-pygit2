@@ -8,15 +8,15 @@
 Summary:	Python bindings for libgit2 library
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki libgit2
 Name:		python-%{module}
-Version:	1.2.1
-Release:	2
+Version:	1.5.0
+Release:	1
 License:	GPL v2 with linking exception
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/pygit2/
 Source0:	https://files.pythonhosted.org/packages/source/p/pygit2/%{pypi_name}-%{version}.tar.gz
-# Source0-md5:	20aa2d7a80d28ee87f5a17f373444f6f
+# Source0-md5:	2b4590e3a0a08f03d5db6faf3d3ff66c
 URL:		https://pypi.org/project/pygit2/
-BuildRequires:	libgit2-devel >= 1.0
+BuildRequires:	libgit2-devel >= 1.1
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
 BuildRequires:	python3-cffi >= 1.8.1
@@ -24,7 +24,7 @@ BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	python3-setuptools
 %{?with_tests:BuildRequires:	python3-pytest}
-Requires:	libgit2 >= 0.24.0
+Requires:	libgit2 >= 1.1
 Requires:	python-cffi
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -38,7 +38,7 @@ pygit2 to zbiór wiązań Pythona do biblioteki współdzielonej libgit2.
 Summary:	Python 3.x bindings for libgit2 library
 Summary(pl.UTF-8):	Wiązania Pythona 3.x do biblioteki libgit2
 Group:		Libraries/Python
-Requires:	libgit2 >= 0.24.0
+Requires:	libgit2 >= 1.1
 Requires:	python3-cffi
 
 %description -n python3-%{module}
