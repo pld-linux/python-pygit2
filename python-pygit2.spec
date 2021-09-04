@@ -8,13 +8,13 @@
 Summary:	Python bindings for libgit2 library
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki libgit2
 Name:		python-%{module}
-Version:	1.5.0
+Version:	1.6.1
 Release:	1
 License:	GPL v2 with linking exception
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/pygit2/
 Source0:	https://files.pythonhosted.org/packages/source/p/pygit2/%{pypi_name}-%{version}.tar.gz
-# Source0-md5:	2b4590e3a0a08f03d5db6faf3d3ff66c
+# Source0-md5:	dea86e8c5db413d547dc6509124ccbf9
 URL:		https://pypi.org/project/pygit2/
 BuildRequires:	libgit2-devel >= 1.1
 BuildRequires:	rpm-pythonprov
