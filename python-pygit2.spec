@@ -15,6 +15,7 @@ Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/pygit2/
 Source0:	https://files.pythonhosted.org/packages/source/p/pygit2/%{pypi_name}-%{version}.tar.gz
 # Source0-md5:	dea86e8c5db413d547dc6509124ccbf9
+Patch0:		libgit2-1.2.patch
 URL:		https://pypi.org/project/pygit2/
 BuildRequires:	libgit2-devel >= 1.1
 BuildRequires:	rpm-pythonprov
@@ -49,6 +50,7 @@ pygit2 to zbiór wiązań Pythona do biblioteki współdzielonej libgit2.
 
 %prep
 %setup -q -n %{module}-%{version}
+%patch0 -p1
 
 %build
 %py3_build
