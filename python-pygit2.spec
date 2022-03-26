@@ -9,7 +9,7 @@ Summary:	Python bindings for libgit2 library
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki libgit2
 Name:		python-%{module}
 Version:	1.6.1
-Release:	2
+Release:	3
 License:	GPL v2 with linking exception
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/pygit2/
