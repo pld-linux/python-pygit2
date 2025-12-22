@@ -8,19 +8,18 @@
 Summary:	Python bindings for libgit2 library
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki libgit2
 Name:		python-%{module}
-Version:	1.16.0
-Release:	3
+Version:	1.19.0
+Release:	1
 License:	GPL v2 with linking exception
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/pygit2/
 Source0:	https://files.pythonhosted.org/packages/source/p/pygit2/%{pypi_name}-%{version}.tar.gz
-# Source0-md5:	6badd46c191ecf776d24da5ed175790c
-Patch0:		gcc14.patch
+# Source0-md5:	411d41189d99a69e6c7f0faa35e62442
 URL:		https://pypi.org/project/pygit2/
 BuildRequires:	libgit2-devel >= 1.4
-BuildRequires:	python3-cffi >= 1.17.0
-BuildRequires:	python3-devel >= 1:3.10
-BuildRequires:	python3-modules >= 1:3.10
+BuildRequires:	python3-cffi >= 2.0
+BuildRequires:	python3-devel >= 1:3.11
+BuildRequires:	python3-modules >= 1:3.11
 BuildRequires:	python3-setuptools
 %{?with_tests:BuildRequires:	python3-pytest}
 BuildRequires:	rpm-pythonprov
@@ -47,7 +46,6 @@ pygit2 to zbiór wiązań Pythona do biblioteki współdzielonej libgit2.
 
 %prep
 %setup -q -n %{module}-%{version}
-%patch -P 0 -p1
 
 %build
 %py3_build
